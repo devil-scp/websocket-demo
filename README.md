@@ -63,3 +63,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 ### 使用
 - 启动服务 
 - 浏览器访问[websocket工具](https://www.idcd.com/tool/socket)
+
+### WebSocket Handshake
+相当于拦截器，可以定制化http握手前后的操作。比如获取token,进行认证等。

@@ -8,6 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import io.choerodon.demo.websocket.handler.MyHandler;
+import io.choerodon.demo.websocket.interceptor.WebSocketInterceptor;
 
 /**
  * @author scp
@@ -19,11 +20,16 @@ import io.choerodon.demo.websocket.handler.MyHandler;
 public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(myHandler(),"/web-socket").setAllowedOrigins("*");
+        webSocketHandlerRegistry.addHandler(myHandler(), "/web-socket").addInterceptors(webSocketInterceptor()).setAllowedOrigins("*");
     }
 
     @Bean
     public WebSocketHandler myHandler() {
         return new MyHandler();
+    }
+
+    @Bean
+    public WebSocketInterceptor webSocketInterceptor() {
+        return new WebSocketInterceptor();
     }
 }
